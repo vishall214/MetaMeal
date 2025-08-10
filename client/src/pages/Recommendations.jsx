@@ -358,7 +358,7 @@ export default function Recommendations() {
       <BackButton />
       
       <Header>
-        <Title>AI Workout Recommendations</Title>
+        <Title>Workout Recommendations</Title>
         <Subtitle>
           Personalized workout plans and fitness guidance powered by machine learning
         </Subtitle>

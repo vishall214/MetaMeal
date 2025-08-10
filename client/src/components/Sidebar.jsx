@@ -283,7 +283,7 @@ const Sidebar = () => {
                 <FaUtensils /> Library
               </StyledNavLink>
               <StyledNavLink to="/recommendations">
-                <FaLightbulb /> Workout Recommendations
+                <FaLightbulb /> Workout
               </StyledNavLink>
               <StyledNavLink to="/analytics">
                 <FaChartBar /> Analytics
