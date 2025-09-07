@@ -1,7 +1,7 @@
 # MetaMeal Deployment Configuration
 
 ## Live URLs
-- **Frontend (Vercel)**: [Your Vercel URL will appear here]
+- **Frontend (Vercel)**: https://meta-meal.vercel.app
 - **Backend (Render)**: https://metameal-backend-d2un7fur433s73efmpig.onrender.com
 - **API Endpoint**: https://metameal-backend-d2un7fur433s73efmpig.onrender.com/api
 
@@ -20,7 +20,7 @@ NODE_ENV=production
 MONGODB_URI=mongodb+srv://vishalnyapathi214:5QgwpkLnDSoxkdvf@maindb.mx4soxz.mongodb.net/main?retryWrites=true&w=majority&appName=MainDB
 JWT_SECRET=your_super_secure_jwt_secret_change_this_123456789
 JWT_EXPIRE=30d
-CORS_ORIGIN=*
+CORS_ORIGIN=https://meta-meal.vercel.app
 PORT=5002
 ```
 
