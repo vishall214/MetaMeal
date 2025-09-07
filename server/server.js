@@ -20,7 +20,14 @@ const quizRoutes = require('./routes/quizRoutes');
 const mlRoutes = require('./routes/mlRoutes');
 
 // Connect to MongoDB
-connectDB();
+connectDB()
+  .then(() => {
+    console.log('✅ Database connected successfully');
+  })
+  .catch(err => {
+    console.error('❌ Database connection failed:', err.message);
+    // Continue anyway for testing
+  });
 
 const app = express();
 
@@ -44,6 +51,16 @@ app.get('/health', (req, res) => {
     status: 'ok',
     environment: config.NODE_ENV,
     mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
+});
+
+// Root route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'MetaMeal Backend API is running!',
+    version: '1.0.0',
+    environment: config.NODE_ENV,
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -73,8 +90,9 @@ const startServer = (port) => {
   }
 
   try {
-    const server = app.listen(portNum, () => {
+    const server = app.listen(portNum, '0.0.0.0', () => {
       console.log(`🚀 Server running on port ${portNum} in ${config.NODE_ENV} mode`);
+      console.log(`Server accessible at http://0.0.0.0:${portNum}`);
     });
 
     server.on('error', (e) => {
