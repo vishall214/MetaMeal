@@ -2,15 +2,19 @@
 
 ## Live URLs
 - **Frontend (Vercel)**: https://meta-meal.vercel.app
-- **Backend (Render)**: https://metameal-backend-d2un7fur433s73efmpig.onrender.com
-- **API Endpoint**: https://metameal-backend-d2un7fur433s73efmpig.onrender.com/api
+- **Backend (Render)**: https://metameal-backend.onrender.com
+- **API Endpoint**: https://metameal-backend.onrender.com/api
+
+## Service Details
+- **Vercel Project ID**: prj_TxVOjMO7oOdGe2QEW1vh10NXMnV2
+- **Render Service ID**: srv-d2un7fur433s73efmpig
 
 ## Environment Variables Setup
 
 ### Vercel (Frontend)
 Add this environment variable in Vercel Dashboard:
 ```
-REACT_APP_API_URL=https://metameal-backend-d2un7fur433s73efmpig.onrender.com/api
+REACT_APP_API_URL=https://metameal-backend.onrender.com/api
 ```
 
 ### Render (Backend) 
