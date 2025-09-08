@@ -1,0 +1,15 @@
+name: Keep Backend Alive
+on:
+  schedule:
+    - cron: '*/14 * * * *'  # Every 14 minutes
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend Health Endpoint
+        run: |
+          echo "Pinging MetaMeal backend..."
+          curl -f https://metameal-backend.onrender.com/health || echo "Backend might be sleeping, this is normal"
+          echo "Ping completed at $(date)"

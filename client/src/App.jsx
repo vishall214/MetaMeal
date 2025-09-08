@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
@@ -7,6 +7,9 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import ToastProvider from './components/Toast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Services
+import BackendKeepAlive from './services/keepAlive';
 
 // Layout
 import Layout from './components/Layout';
@@ -57,6 +60,19 @@ const PublicRoute = ({ children }) => {
 };
 
 function App() {
+  // Initialize keep-alive service for production
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      const keepAlive = new BackendKeepAlive();
+      keepAlive.start();
+      
+      // Cleanup on unmount
+      return () => {
+        keepAlive.stop();
+      };
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
