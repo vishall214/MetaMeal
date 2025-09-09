@@ -1,15 +1,28 @@
 name: Keep Backend Alive
 on:
   schedule:
-    - cron: '*/14 * * * *'  # Every 14 minutes
+    - cron: '*/13 * * * *'  # Every 13 minutes (more frequent)
   workflow_dispatch: # Allow manual trigger
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Backend Health Endpoint
+      - name: Ping Backend Multiple Endpoints
         run: |
-          echo "Pinging MetaMeal backend..."
-          curl -f https://metameal-backend.onrender.com/health || echo "Backend might be sleeping, this is normal"
-          echo "Ping completed at $(date)"
+          echo "🚀 Starting backend keep-alive ping..."
+          echo "Timestamp: $(date)"
+          
+          # Try root endpoint first
+          echo "Pinging root endpoint..."
+          curl -s -o /dev/null -w "Status: %{http_code}, Time: %{time_total}s\n" https://metameal-backend.onrender.com/ || echo "Root endpoint failed"
+          
+          # Try health endpoint
+          echo "Pinging health endpoint..."
+          curl -s -o /dev/null -w "Status: %{http_code}, Time: %{time_total}s\n" https://metameal-backend.onrender.com/health || echo "Health endpoint failed"
+          
+          # Try API endpoint
+          echo "Pinging API endpoint..."
+          curl -s -o /dev/null -w "Status: %{http_code}, Time: %{time_total}s\n" https://metameal-backend.onrender.com/api || echo "API endpoint failed"
+          
+          echo "✅ Keep-alive ping completed at $(date)"
